@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- Configuração da viewport para responsividade -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Down - Jogo 16 bits</title>
+  <link rel="stylesheet" href="meusite.css">
+  <style>
+    @font-face {
+        font-family: 'medieval';
+        src: url(fontes/Olondon_.otf) format('opentype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+   
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Cabeçalho -->
+    <header>
+      <h1>Bem-vindo ao Top Down</h1>
+      <p>Reviva a era dos jogos 16 bits!</p>
+    </header>
+
+    <!-- Menu de Navegação -->
+    <nav>
+        <span class="game-title">Top Down</span>
+        <!-- Input de controle do menu "hambúrguer" -->
+        <input type="checkbox" class="menu-faketrigger" id="menu-toggle">
+        <!-- Ícone do menu -->
+        <label class="menu-lines" for="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <!-- Itens do menu -->
+        <ul id="nav-list">
+          <li><a href="#sobre">Sobre o Jogo</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#video">Trailer</a></li>
+          <li><a href="#login">Login/Registro</a></li>
+        </ul>
+      </nav>
+
+    <!-- Conteúdo Principal -->
+    <main>
+      <!-- Seção sobre o jogo -->
+      <section id="sobre">
+        <h2>Sobre o Top Down</h2>
+        <p>Entre em um mundo de aventuras com gráficos e jogabilidade inspirados nos clássicos 16 bits. Explore níveis desafiadores, derrote inimigos e descubra segredos!</p>
+        <img src="imagens/Screenshot_47.png" alt="Imagem temática do Top Down">
+      </section>
+
+      <!-- Carrossel de Imagens (Temática do Jogo) -->
+      <section id="galeria" class="carousel">
+        <div class="carousel-images" id="carousel-images">
+          <img src="imagens/Screenshot_48.png" alt="Fase 1">
+          <img src="imagens/Screenshot_47.png" alt="Fase 2">
+          <img src="imagens/Screenshot_49.png" alt="Fase 3">
+        </div>
+      </section>
+
+      <!-- Vídeo Trailer -->
+      <section id="video" class="video-container">
+        <video controls>
+          <source src="imagens/unknown_2025.02.20-18.01_clip_1.mp4" type="video/mp4">
+          Seu navegador não suporta o elemento de vídeo.
+        </video>
+      </section>
+    </main>
+
+    <!-- Seção de Login/Registro -->
+    <section id="login" class="login">
+      <!-- Tabela de Registro de Jogadores -->
+      <div>
+        <h3>Registro de Jogadores</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Usuário</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jogador1</td>
+              <td>Online</td>
+            </tr>
+            <tr>
+              <td>Jogador2</td>
+              <td>Offline</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Formulário de Login -->
+      <div>
+        <h3>Login</h3>
+        <form action="#" method="post">
+          <input type="text" name="usuario" placeholder="Nome de Usuário" required>
+          <input type="password" name="senha" placeholder="Senha" required>
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+      <p>&copy; 2025 Top Down. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+
+  <!-- Scripts para interatividade -->
+  <script>
+    // Funcionalidade do carrossel de imagens
+    let currentIndex = 0;
+    const carouselImages = document.getElementById('carousel-images');
+    const totalImages = carouselImages.children.length;
+    
+    function showNextImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      carouselImages.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+    }
+    
+    // Troca automática de slides a cada 3 segundos
+    setInterval(showNextImage, 3000);
+    
+    // Suporte a gestos de toque para o carrossel
+    let startX = 0;
+    carouselImages.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+    });
+    carouselImages.addEventListener('touchend', function(e) {
+      let endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) {
+        showNextImage();
+      } else if (endX - startX > 50) {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        carouselImages.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+      }
+    });
+  </script>
+</body>
+</html>
